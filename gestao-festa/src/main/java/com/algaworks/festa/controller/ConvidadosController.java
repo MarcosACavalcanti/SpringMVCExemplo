@@ -2,6 +2,7 @@ package com.algaworks.festa.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,13 +12,12 @@ import com.algaworks.festa.model.Convidado;
 import com.algaworks.festa.repository.Convidados;
 
 @Controller
-@RequestMapping("/convidados")
 public class ConvidadosController {
 	
 	@Autowired
 	private Convidados convidados;
 	
-	@GetMapping
+	@GetMapping("/convidados")
 	public ModelAndView listar() {
 		
 		ModelAndView modelandview = new ModelAndView("ListaConvidados");
@@ -27,11 +27,17 @@ public class ConvidadosController {
 		
 	}
 	
-	@PostMapping
+	@PostMapping("/convidados")
 	public String salvar(Convidado convidado) {
 		this.convidados.save(convidado);
 		return "redirect:/convidados";
 		
+	}
+	
+	@PostMapping("/deletarConvidados")
+	public String deletar(Convidado convidado) {
+		this.convidados.delete(convidado);
+		return "redirect:/convidados";
 	}
 
 }

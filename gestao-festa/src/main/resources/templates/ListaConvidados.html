@@ -18,6 +18,14 @@ rel="stylesheet"/>
 			<button type="submit" class="btn btn-primary">Adicionar</button>
 		</div>
 	</form>
+	<form class="form-inline" method="POST"th:object="${convidado}"	th:action="@{/deletarConvidados}" 	style="margin: 20px 0">
+		<div class="form-group">
+			<input type="text" class="form-control"	placeholder="Id"	th:field="*{id}"/>
+			<input type="text" class="form-control"	placeholder="Nome"	th:field="*{nome}"/>
+			<input type="text" class="form-control"	placeholder="Acompanhantes"	th:field="*{quantidadeAcompanhantes}" />
+			<button type="submit" class="btn btn-primary">Adicionar</button>
+		</div>
+	</form>
 	<div class="panel panel-default" style="margin: 10px">
 		<div class="panel-heading">
 			<h1 class="panel-title">Lista de Concidados</h1>
@@ -27,12 +35,14 @@ rel="stylesheet"/>
 			<table class="table">
 				<thead>
 					<tr>
+						<th>Id</th>
 						<th>Nome</th>
 						<th>Acompanhantes</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="convidado : ${convidados}">
+						<td th:text="${convidado.id}"></td>
 						<td th:text="${convidado.nome}"></td>
 						<td th:text="${convidado.quantidadeAcompanhantes}"></td>
 					</tr>
